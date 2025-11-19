@@ -1,0 +1,29 @@
+name: Pappy Jacks - Evening Rotation (10 PM)
+
+on:
+  schedule:
+    # Run at 10:00 PM Central on Sun, Tue, Wed, Thu, Fri, Sat (4:00 AM UTC next day)
+    # Skips Monday night (restaurant closed Monday)
+    - cron: '0 4 * * 0,2,3,4,5,6'
+  workflow_dispatch: # Allow manual triggering for testing
+
+jobs:
+  evening-rotation:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Run evening rotation
+        env:
+          HYPERZOD_API_KEY: ${{ secrets.HYPERZOD_API_KEY }}
+          HYPERZOD_TENANT_ID: ${{ secrets.HYPERZOD_TENANT_ID }}
+          PAPPY_JACKS_MERCHANT_ID: ${{ secrets.PAPPY_JACKS_MERCHANT_ID }}
+        run: |
+          node pappy-jacks-automation.js evening-rotation
