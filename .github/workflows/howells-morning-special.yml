@@ -1,0 +1,28 @@
+name: Howells - Morning Special (10:30 AM)
+
+on:
+  schedule:
+    # Run at 10:30 AM Central Time daily (4:30 PM UTC)
+    - cron: '30 16 * * *'
+  workflow_dispatch: # Allow manual triggering for testing
+
+jobs:
+  morning-special:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+      
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '18'
+      
+      - name: Run morning special
+        env:
+          HYPERZOD_API_KEY: ${{ secrets.HYPERZOD_API_KEY }}
+          HYPERZOD_TENANT_ID: ${{ secrets.HYPERZOD_TENANT_ID }}
+          HOWELLS_MERCHANT_ID: ${{ secrets.HOWELLS_MERCHANT_ID }}
+        run: |
+          node howells-automation.js morning-special
