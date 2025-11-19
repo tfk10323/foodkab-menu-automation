@@ -1,0 +1,22 @@
+{
+  "name": "hyperzod-menu-automation",
+  "version": "1.0.0",
+  "description": "Automated menu category management for Food KAB restaurants using Hyperzod API",
+  "main": "hyperzod-menu-automation.js",
+  "scripts": {
+    "test:evening": "node hyperzod-menu-automation.js evening-flip",
+    "test:morning": "node hyperzod-menu-automation.js morning-lunch",
+    "test:breakfast": "node hyperzod-menu-automation.js breakfast-end"
+  },
+  "keywords": [
+    "hyperzod",
+    "food-kab",
+    "automation",
+    "menu-management"
+  ],
+  "author": "Food KAB",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
