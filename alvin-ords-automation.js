@@ -160,21 +160,22 @@ async function updateCategories(categories, status, label) {
 }
 
 /**
- * Get current day of week (lowercase)
+ * Get current day of week (lowercase) in Central Time
  */
 function getCurrentDay() {
   const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-  return days[new Date().getDay()];
+  const centralDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+  return days[centralDate.getDay()];
 }
 
 /**
- * Get tomorrow's day of week (lowercase)
+ * Get tomorrow's day of week (lowercase) in Central Time
  */
 function getTomorrowDay() {
   const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-  const tomorrow = new Date();
-  tomorrow.setDate(tomorrow.getDate() + 1);
-  return days[tomorrow.getDay()];
+  const centralDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+  const tomorrowIndex = (centralDate.getDay() + 1) % 7;
+  return days[tomorrowIndex];
 }
 
 /**
@@ -188,6 +189,8 @@ async function runEveningRotation() {
   
   const today = getCurrentDay();
   const tomorrow = getTomorrowDay();
+  
+  console.log(`Day: ${today} → Rotating to ${tomorrow}`);
   
   // Turn OFF today's special (if it exists - not Sunday)
   const todaySpecial = CATEGORIES.dailySpecials[today];
