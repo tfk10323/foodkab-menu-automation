@@ -215,9 +215,10 @@ async function updateCategories(categories, status, label) {
  * Get current day of week (lowercase)
  */
 function getCurrentDay() {
-  const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
-  return days[new Date().getDay()];
-}
+     const days = ['sunday', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday'];
+     const centralDate = new Date(new Date().toLocaleString('en-US', { timeZone: 'America/Chicago' }));
+     return days[centralDate.getDay()];
+   }
 
 /**
  * Run the evening flip (10 PM)
