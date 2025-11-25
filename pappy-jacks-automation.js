@@ -130,6 +130,7 @@ function getCurrentDay() {
 function getNextDay(today) {
   const dayMap = {
     'sunday': 'tuesday',    // Skip Monday (closed)
+    'monday': 'tuesday',    // Safety: if somehow called on Monday, go to Tuesday
     'tuesday': 'wednesday',
     'wednesday': 'thursday',
     'thursday': 'friday',

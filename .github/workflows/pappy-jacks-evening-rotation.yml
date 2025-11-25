@@ -2,9 +2,10 @@ name: Pappy Jacks - Evening Rotation (10 PM)
 
 on:
   schedule:
-    # Run at 10:00 PM Central on Sun, Tue, Wed, Thu, Fri, Sat (4:00 AM UTC next day)
-    # Skips Monday night (restaurant closed Monday)
-    - cron: '0 4 * * 0,2,3,4,5,6'
+    # Run at 10:00 PM Central on Sat, Sun, Tue, Wed, Thu, Fri (4:00 AM UTC next day)
+    # Skips Monday 10 PM (restaurant closed Monday, no rotation needed)
+    # Day mapping: 0=Sat 10PM CT, 1=Sun 10PM CT, 3=Tue 10PM CT, etc.
+    - cron: '0 4 * * 0,1,3,4,5,6'
   workflow_dispatch: # Allow manual triggering for testing
 
 jobs:
